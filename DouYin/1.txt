@@ -1,0 +1,2 @@
+https://api-service.chanmama.com/v1/home/author/info?author_id=6000026162
+https://api-service.chanmama.com/v1/home/author/info?author_id=6000026162

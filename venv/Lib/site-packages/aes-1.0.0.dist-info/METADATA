@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: aes
+Version: 1.0.0
+Summary: AES(Advanced Encryption Standard) in Python
+Home-page: https://github.com/DonggeunKwon/aes
+Author: Donggeun Kwon
+Author-email: donggeun.kwon@gmail.com
+License: UNKNOWN
+Download-URL: https://github.com/DonggeunKwon/aes/archive/1.0.tar.gz
+Keywords: AES,Cipher,Advanced Encryption Standard
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3
+
+UNKNOWN
+
+
