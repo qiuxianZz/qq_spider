@@ -200,34 +200,34 @@ def timeStamp_(Y, m, d, H, M, S):
     return timeStamp
 
 
-def main():
-    # get_article()
-
-    global uid, max_time
-    max_time = timeStamp_(2019, 10, 10, 00, 00, 00)
-
-    user_id = [95858796570, 4931329242, 5443257860, 5856631223, 2053497172272163, 52270200701, 15628441699, 92759961612,
-               100118439201, 6989512897, 20353903130, 5263800450, 61749076352, 61746455612,
-               61746388948, 67627004851, 61749473542, 61748360588, 61749472947, 61747696266, 61745883201, 60067064925,
-               61748538913, 61748261798, 5910115546, 61747700995, 97082579926, 50226404364, 70318658273751670122517774]
-    # user_id = [5954781019]
-    # user_id = website_t(url='https://www.toutiao.com/c/user/relation/5954781019/?tab=following#mid=5954781019')
-    for uid in user_id:
-        print(uid)
-        print("__________________________________________________")
-        # website_t(item)
-        url = 'https://www.toutiao.com/c/user/article/?' \
-              'page_type={}&user_id={}&max_behot_time=0&count=20'
-        while True:
-            url = json_con(url.format(0, uid))
-            print(url)
-            if url == 'GG':
-                break
-        time.sleep(5)
-
-
-if __name__ == '__main__':
-    main()
+# def main():
+#     # get_article()
+#
+#     global uid, max_time
+#     max_time = timeStamp_(2019, 10, 10, 00, 00, 00)
+#
+#     user_id = [95858796570, 4931329242, 5443257860, 5856631223, 2053497172272163, 52270200701, 15628441699, 92759961612,
+#                100118439201, 6989512897, 20353903130, 5263800450, 61749076352, 61746455612,
+#                61746388948, 67627004851, 61749473542, 61748360588, 61749472947, 61747696266, 61745883201, 60067064925,
+#                61748538913, 61748261798, 5910115546, 61747700995, 97082579926, 50226404364, 70318658273751670122517774]
+#     # user_id = [5954781019]
+#     # user_id = website_t(url='https://www.toutiao.com/c/user/relation/5954781019/?tab=following#mid=5954781019')
+#     for uid in user_id:
+#         print(uid)
+#         print("__________________________________________________")
+#         # website_t(item)
+#         url = 'https://www.toutiao.com/c/user/article/?' \
+#               'page_type={}&user_id={}&max_behot_time=0&count=20'
+#         while True:
+#             url = json_con(url.format(0, uid))
+#             print(url)
+#             if url == 'GG':
+#                 break
+#         time.sleep(5)
+#
+#
+# if __name__ == '__main__':
+#     main()
 
 #
 # url = 'https://www.toutiao.com/c/user/article/?page_type=1&user_id=6186597332&max_behot_time=0&count=20&as=A1B5EDCB9244A64&cp=5DB224CAC6E48E1&_signature=6.sbdhAVtlRB1Fv2uawH9uv7G2'
@@ -305,20 +305,16 @@ def get_content(uid):
 
 
 def main():
-    global uid
-    # user_id = [95858796570, 4931329242, 5443257860, 5856631223, 2053497172272163, 52270200701, 15628441699, 92759961612,
-    #            100118439201, 6989512897, 20353903130, 5263800450, 61749076352, 61746455612,
-    #            61746388948, 67627004851, 61749473542, 61748360588, 61749472947, 61747696266, 61745883201, 60067064925,
-    #            61748538913, 61748261798, 5910115546, 61747700995, 97082579926, 50226404364, 70318658273,751670122517774]
-    user_id = [3200725091]
-    for uid in user_id:
-        get_content(uid)
+    print(get_sign(6029241157,22222))
+    # global uid
+    # # user_id = [95858796570, 4931329242, 5443257860, 5856631223, 2053497172272163, 52270200701, 15628441699, 92759961612,
+    # #            100118439201, 6989512897, 20353903130, 5263800450, 61749076352, 61746455612,
+    # #            61746388948, 67627004851, 61749473542, 61748360588, 61749472947, 61747696266, 61745883201, 60067064925,
+    # #            61748538913, 61748261798, 5910115546, 61747700995, 97082579926, 50226404364, 70318658273,751670122517774]
+    # user_id = [3200725091]
+    # for uid in user_id:
+    #     # get_content(uid)
 
 
 if __name__ == '__main__':
     main()
-#
-'https://www.toutiao.com/c/user/article/?page_type=0&user_id=70318658273&max_behot_time=0&count=20'
-'https://www.toutiao.com/c/user/article/?page_type=0&user_id=70318658273&max_behot_time=0&count=20&as=A1256E6173E056D&cp=5E1350C5762DDE1'
-# https://www.toutiao.com/c/user/article/?page_type=1&user_id=70318658273&max_behot_time=0&count=20&as=A105DE51F3E05FF&cp=5E1380351FCFFE1
-# https://www.toutiao.com/c/user/article/?page_type=0&user_id=70318658273&max_behot_time=0&count=20&as=A1754E1173105FC&cp=5E1380352F6CAE1

@@ -1,4 +1,4 @@
-from Loggeer import Logger
+from qq.Loggeer import Logger
 
 log_obj = Logger('zimeibao.log', level='debug')
 # print(log_obj)

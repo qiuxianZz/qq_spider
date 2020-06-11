@@ -67,8 +67,8 @@ headers = {
 # E14225119517680066393
 url = 'https://h5.ele.me/pizza/shopping/restaurants/E14225119517680066393/batch_shop?user_id=2000005745685&code=0.100087204148261&extras=%5B%22activities%22%2C%22albums%22%2C%22license%22%2C%22identification%22%2C%22qualification%22%5D&terminal=h5&latitude=30.626432&longitude=104.006968'
 url = 'https://h5.ele.me/pizza/shopping/restaurants/E1650974346708109725/batch_shop?user_id=2000005745685&code=0.100087204148261&extras=%5B%22activities%22%2C%22albums%22%2C%22license%22%2C%22identification%22%2C%22qualification%22%5D&terminal=h5&latitude=30.626432&longitude=104.006968'
-res = requests.get(url, headers=headers)
-print(res.raw._connection.sock.getpeername()[0])
+# res = requests.get(url, headers=headers)
+# print(res.raw._connection.sock.getpeername()[0])
 
 # address = '成都市'
 # url= 'http://api.map.baidu.com/geocoder?output=json&key=f247cdb592eb43ebac6ccd27f796e2d2&address='+str(address)
