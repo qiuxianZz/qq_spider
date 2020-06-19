@@ -29,7 +29,7 @@ def export_data(excle_data:str):
 
     return list
 
-# print(export_data('./10月企业.xlsx'))
+print(export_data('./5月25日至6月7日头条号.xlsx'))
 
 
 

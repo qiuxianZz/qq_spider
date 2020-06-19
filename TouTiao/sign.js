@@ -16,4 +16,6 @@
                      return data;
                  }
 
-                 console.log(a());
+                 co
+
+                 nsole.log(a());

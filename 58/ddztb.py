@@ -1,7 +1,9 @@
 # -*- coding: UTF-8 -*-
-
-
+import datetime
 import re
+import threading
+import time
+from threading import Thread
 
 import pymysql
 import requests
@@ -56,8 +58,8 @@ def save_con(con):
         cursor.execute(select_sql)
         res = cursor.fetchall()
         if res == ():
-            sql = 'INSERT INTO ddztb_data (auth,tag,`name`,phone,tel,`add`,`code`) VALUES' \
-                  f'("{con["auth"]}", "{con["tag"]}", "{con["name"]}", "{con["phone"]}"' \
+            sql = 'INSERT INTO ddztb_data (company,auth,tag,`name`,phone,tel,`add`,`code`) VALUES' \
+                  f'("{con["company"]}","{con["auth"]}", "{con["tag"]}", "{con["name"]}", "{con["phone"]}"' \
                   f',"{con["tel"]}","{con["add"]}","{con["code"]}") '
             print(sql)
             execute_sql(sql, conn)
@@ -97,6 +99,8 @@ def getcon(id):
         data['tag'] = tag[0]
     aa = tree.xpath('/html/body/div[3]/div[2]/div[1]/div[2]/div/ul')
     con = aa[0].xpath('string(.)').strip()
+
+
 
     name = re.findall('联系人：(.*?)手机', con, re.S)
     if name != []:
@@ -161,35 +165,47 @@ def getcon(id):
 #         q.put(uid)
 #         uid += 1
 #
-#
-# def Consumer():
-#     '''消费者'''
-#     while True:
-#         # uid = q.get()
-#         uid = counter()
-#         con = getcon(uid)
-#         if con != None:
-#             save_con(con)
-#
 
-# def run():
-#     # p = threading.Thread(target=Producer)
-#     # p.start()
-#     threads = [threading.Thread(target=Consumer) for _ in range(1)]
-#     for thread in threads:
-#         thread.start()
-#     for thread in threads:
-#         thread.join()
+
+def async_call(func):
+    def wrapper(*args, **kwargs):
+        thr = Thread(target=func, args=args, kwargs=kwargs)
+        thr.start()
+    return wrapper
+#
+@async_call
+def Consumer():
+    '''消费者'''
+    while True:
+        # uid = q.get()
+        uid = counter()
+        # if uid > 1000000:
+        #     print("+++++++++++++++++++++++++++++")
+        #     return
+        con = getcon(uid)
+        if con != None:
+            save_con(con)
+
+
+def run():
+    # p = threading.Thread(target=Producer)
+    # p.start()
+    threads = [threading.Thread(target=Consumer) for _ in range(1)]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
 
 
 def increase():  # 定义一个还有自然数算法的生成器,企图使用next来完成不断调用的递增
-    n = 1100000
+    # n = 1198852
+    n = 706278
+    # n = 0
     while True:
         n = n + 1
         yield n
 
 
-it = increase()  # 一定要将生成器转给一个(生成器)对象,才可以完成,笔者第一次做,这里一直出问题,
 
 
 def counter():  # 再定义一内函数
@@ -198,12 +214,20 @@ def counter():  # 再定义一内函数
 
 
 if __name__ == '__main__':
-    # run()
-    # sql = 'CREATE TABLE `ddztb_data` (`id` int(11) NOT NULL AUTO_INCREMENT,`auth` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,`tag` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,`name` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,`phone` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,`tel` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,`add` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,`code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,`insert_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,`update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=3578 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;'
+    # start = datetime.datetime.now()
+    it = increase()  # 一定要将生成器转给一个(生成器)对象,才可以完成,笔者第一次做,这里一直出问题,
+    run()
+    # print("=================================")
+    # end = datetime.datetime.now()
+    # print("时间:  " + str((end - start).seconds))
 
-    uid = 1001977
-    while True:
-        data = getcon(uid)
-        if data != None:
-            save_con(data)
-        uid += 1
+
+
+# sql = 'CREATE TABLE `ddztb_data` (`id` int(11) NOT NULL AUTO_INCREMENT,`auth` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,`tag` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,`name` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,`phone` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,`tel` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,`add` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,`code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,`insert_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,`update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=3578 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;'
+
+    # uid = 1000000
+    # while True:
+    #     data = getcon(uid)
+    #     if data != None:
+    #         save_con(data)
+    #     uid += 1

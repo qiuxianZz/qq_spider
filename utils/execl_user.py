@@ -1,4 +1,5 @@
 # coding=utf-8
+import re
 
 import xlrd
 
@@ -22,11 +23,11 @@ import pymysql
 def get_conn():
     # 建立链接
     conn = pymysql.Connection(
-        host='127.0.0.1',
+        host='192.168.2.210',
         port=3306,
-        user='root',
-        password='123456',
-        database='qx_data'
+        user='phb_data',
+        password='phb_2014',
+        database='phb_data'
     )
     return conn
 
@@ -46,7 +47,7 @@ def close_conn(conn):
 def save_data(uid, name):
     try:
         conn = get_conn()
-        sql = "insert ignore into jrtt_user  (name ,user)values (\"%s\",\"%s\")" % (str(uid), str(name))
+        sql = "insert ignore into acq_tt_user  (uid ,name)values (\"%s\",\"%s\")" % (str(uid), str(name))
         # sql = "UPDATE acq_tt_user SET uid = \"%s\",name = \"%s\"  where name = \"%s\" " %  (str(uid), str(name),str(name))
         print(sql)
         execute_sql(sql, conn)
@@ -56,8 +57,9 @@ def save_data(uid, name):
 
 
 if __name__ == '__main__':
-    excelFile = '头条认证.xlsx'
+    excelFile = '5月25日至6月7日头条号.xlsx'
     data = (read_xlrd(excelFile=excelFile))
     for item in data:
-        print(item[0], item[1])
-        save_data((item[0]), item[1])
+        print(item[1])
+        uids =  re.findall('user/(.*?)/#mid',item[1],re.S)
+        save_data((uids[0]), item[0])
